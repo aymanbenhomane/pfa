@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">ADMIN Dashboard</span>
+        <div class="d-flex">
+                <span sec:authorize="isAuthenticated">
+                    <a class="btn btn-outline-light" th:href="@{/logout}">Logout</a>
+                </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="card bg-secondary text-white shadow">
+        <div class="card-body">
+            <h2 class="card-title text-info">Welcome, [[${user.getFullname()}]]</h2>
+            <!-- Ajoutez ici les composants de votre dashboard -->
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (facultatif, si vous avez besoin de fonctionnalités interactives) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
