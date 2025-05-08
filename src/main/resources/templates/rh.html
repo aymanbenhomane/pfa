@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Page RH</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Bienvenue, Responsable RH</h1>
+
+<p>Bonjour, <strong th:text="${user.username}">Nom Utilisateur</strong> !</p>
+
+<div>
+    <p>Voici votre espace RH sécurisé.</p>
+    <!-- Vous pouvez ajouter ici des liens vers des fonctionnalités RH -->
+    <ul>
+        <!--<li><a th:href="@{/candidats}">Voir les candidatures</a></li>
+        <li><a th:href="@{/entretiens}">Gérer les entretiens</a></li>-->
+        <li><a th:href="@{/logout}">Déconnexion</a></li>
+    </ul>
+</div>
+</body>
+</html>

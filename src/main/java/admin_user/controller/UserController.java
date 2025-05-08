@@ -23,7 +23,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-
 	@GetMapping("/registration")
 	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
 		return "register";
@@ -32,7 +31,7 @@ public class UserController {
 	@PostMapping("/registration")
 	public String saveUser(@ModelAttribute("user") UserDto userDto, Model model) {
 		userService.save(userDto);
-		model.addAttribute("message", "Registered Successfuly!");
+		model.addAttribute("message", "Registered Successfully!");
 		return "register";
 	}
 
@@ -41,18 +40,24 @@ public class UserController {
 		return "login";
 	}
 
-	@GetMapping("user-page")
-	public String userPage (Model model, Principal principal) {
+	@GetMapping("/user-page")
+	public String userPage(Model model, Principal principal) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
 		model.addAttribute("user", userDetails);
 		return "user";
 	}
 
-	@GetMapping("admin-page")
-	public String adminPage (Model model, Principal principal) {
+	@GetMapping("/admin-page")
+	public String adminPage(Model model, Principal principal) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
 		model.addAttribute("user", userDetails);
 		return "admin";
 	}
 
+	@GetMapping("/rh-page")
+	public String rhPage(Model model, Principal principal) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+		model.addAttribute("user", userDetails);
+		return "rh";  // Assurez-vous d’avoir une vue `rh.html`
+	}
 }

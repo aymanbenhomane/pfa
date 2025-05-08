@@ -33,22 +33,20 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(c -> c.disable())
 
-				// Configuration des autorisations pour les pages spécifiques
 				.authorizeHttpRequests(request -> request
 						.requestMatchers("/admin-page").hasAuthority("ADMIN")
+						.requestMatchers("/rh-page").hasAuthority("RH") // Page spécifique pour RH
 						.requestMatchers("/user-page").hasAuthority("USER")
 						.requestMatchers("/registration", "/css/**").permitAll()
-						.requestMatchers("/user/save", "/dashboard").authenticated() // Authentification pour les pages de soumission
+						.requestMatchers("/user/save", "/dashboard").authenticated()
 						.anyRequest().authenticated())
 
-				// Configuration de la page de login
 				.formLogin(form -> form
 						.loginPage("/login")
 						.loginProcessingUrl("/login")
 						.successHandler(customSuccessHandler)
 						.permitAll())
 
-				// Configuration de la déconnexion
 				.logout(form -> form
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
@@ -58,6 +56,7 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
